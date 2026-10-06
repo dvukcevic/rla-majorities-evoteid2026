@@ -582,6 +582,8 @@ Paper :bookmark_tabs: <https://arxiv.org/abs/2607.21082>
 
 Software :minidisc: <https://github.com/freejstone/RLA_parliamentary_majorities_code>
 
+![](images/qrcode_dvukcevic-github-io.png)
+
 ## References :books: {#references .smaller}
 
 - Benjamini, Heller (2008). [Screening for partial conjunction hypotheses](https://doi.org/10.1111/j.1541-0420.2007.00984.x). *Biometrics* 64(4):1215-1222.
