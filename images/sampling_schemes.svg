@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 723.39 300">
+  <!-- Generator: Adobe Illustrator 30.3.0, SVG Export Plug-In . SVG Version: 2.1.3 Build 182)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #999;
+      }
+
+      .st0, .st1, .st2, .st3, .st4, .st5, .st6, .st7, .st8, .st9, .st10, .st11, .st12, .st13, .st14, .st15, .st16, .st17, .st18, .st19 {
+        isolation: isolate;
+      }
+
+      .st0, .st18 {
+        font-family: Arial-ItalicMT, Arial;
+        font-size: 8px;
+        font-style: italic;
+      }
+
+      .st1 {
+        fill: #888;
+      }
+
+      .st1, .st3, .st8, .st14, .st15, .st19 {
+        font-family: ArialMT, Arial;
+      }
+
+      .st1, .st3, .st10, .st12, .st17 {
+        font-size: 8.5px;
+      }
+
+      .st2 {
+        font-size: 5.8px;
+      }
+
+      .st2, .st4, .st6, .st9, .st10, .st20, .st11, .st12, .st13, .st16 {
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+      }
+
+      .st2, .st4, .st6, .st10, .st11, .st12, .st13, .st19 {
+        fill: #666;
+      }
+
+      .st3, .st21 {
+        fill: #5b9bd5;
+      }
+
+      .st22, .st23, .st24, .st25 {
+        fill: none;
+      }
+
+      .st22, .st24 {
+        stroke: #555;
+      }
+
+      .st22, .st25 {
+        stroke-width: 1.2px;
+      }
+
+      .st4 {
+        font-size: 4.93px;
+      }
+
+      .st23 {
+        stroke: #eee;
+        stroke-width: .8px;
+      }
+
+      .st6, .st8, .st9, .st20, .st11, .st13, .st16, .st19 {
+        font-size: 10px;
+      }
+
+      .st7 {
+        fill: #1a1a1a;
+        font-size: 13px;
+      }
+
+      .st7, .st17 {
+        font-family: Arial-BoldMT, Arial;
+        font-weight: 700;
+      }
+
+      .st26, .st17 {
+        fill: #ed7d31;
+      }
+
+      .st8, .st9 {
+        fill: #222;
+      }
+
+      .st10 {
+        letter-spacing: -.02em;
+      }
+
+      .st20, .st16 {
+        fill: #333;
+      }
+
+      .st11 {
+        letter-spacing: 0em;
+      }
+
+      .st27 {
+        fill: #fff;
+      }
+
+      .st13 {
+        letter-spacing: 0em;
+      }
+
+      .st25 {
+        stroke: #c33;
+        stroke-dasharray: 5 3;
+      }
+
+      .st28 {
+        fill: #bfbfbf;
+      }
+
+      .st14 {
+        fill: #c33;
+      }
+
+      .st14, .st15 {
+        font-size: 9px;
+      }
+
+      .st15 {
+        fill: #555;
+      }
+
+      .st18 {
+        fill: #6e8ec0;
+      }
+
+      .st29 {
+        fill: #eef3fa;
+      }
+    </style>
+  </defs>
+  <rect class="st27" width="723.05" height="300"/>
+  <g class="st5">
+    <text class="st7" transform="translate(74.05 24)"><tspan x="0" y="0">(a) Non-adaptive</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st19" transform="translate(61.97 39)"><tspan x="0" y="0">All seats sampled</tspan></text>
+  </g>
+  <line class="st22" x1="57.15" y1="46" x2="57.15" y2="210"/>
+  <line class="st22" x1="57.15" y1="210" x2="177.15" y2="210"/>
+  <line class="st24" x1="53.15" y1="210" x2="57.15" y2="210"/>
+  <g class="st5">
+    <text class="st15" transform="translate(45.14 213)"><tspan x="0" y="0">0</tspan></text>
+  </g>
+  <line class="st24" x1="53.15" y1="174.82" x2="57.15" y2="174.82"/>
+  <g class="st5">
+    <text class="st15" transform="translate(45.14 177.82)"><tspan x="0" y="0">5</tspan></text>
+  </g>
+  <line class="st24" x1="53.15" y1="139.64" x2="57.15" y2="139.64"/>
+  <g class="st5">
+    <text class="st15" transform="translate(40.14 142.64)"><tspan x="0" y="0">10</tspan></text>
+  </g>
+  <line class="st24" x1="53.15" y1="104.46" x2="57.15" y2="104.46"/>
+  <g class="st5">
+    <text class="st15" transform="translate(40.14 107.46)"><tspan x="0" y="0">15</tspan></text>
+  </g>
+  <line class="st24" x1="53.15" y1="70" x2="57.15" y2="70"/>
+  <g class="st5">
+    <text class="st15" transform="translate(40.14 73)"><tspan x="0" y="0">20</tspan></text>
+  </g>
+  <line class="st23" x1="57.15" y1="174.82" x2="177.15" y2="174.82"/>
+  <line class="st23" x1="57.15" y1="139.64" x2="177.15" y2="139.64"/>
+  <line class="st23" x1="57.15" y1="104.46" x2="177.15" y2="104.46"/>
+  <line class="st25" x1="57.15" y1="70" x2="177.15" y2="70"/>
+  <g class="st5">
+    <text class="st14" transform="translate(179.15 73)"><tspan x="0" y="0">1/<tspan style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 11px">α</tspan></tspan></text>
+  </g>
+  <path class="st21" d="M62.15,204.26h14c.6,0,1,.4,1,1v3.74c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-3.74c0-.6.4-1,1-1Z"/>
+  <path class="st21" d="M86.15,194.92h14c.6,0,1,.4,1,1v13.08c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-13.08c0-.6.4-1,1-1Z"/>
+  <path class="st21" d="M110.15,178.41h14c.6,0,1,.4,1,1v29.59c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-29.59c0-.6.4-1,1-1Z"/>
+  <path class="st21" d="M134.15,146.82h14c.6,0,1,.4,1,1v61.18c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-61.18c0-.6.4-1,1-1Z"/>
+  <path class="st21" d="M158.15,111.64h14c.6,0,1,.4,1,1v96.36c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-96.36c0-.6.4-1,1-1Z"/>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(61.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(65.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₁</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(85.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(89.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₂</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(109.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(113.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₃</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(133.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(137.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₄</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(157.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(161.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₅</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <text class="st0" transform="translate(58.04 236)"><tspan x="0" y="0">(false)</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st7" transform="translate(243.64 24)"><tspan x="0" y="0">(b) Greedy</tspan></text>
+  </g>
+  <g class="st5">
+    <text transform="translate(236.27 39)" style="font-family: ArialMT, Arial; font-size: 10px; fill: #666"><tspan>Active set: </tspan><tspan style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">d</tspan><tspan dy="3" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 7px">t</tspan><tspan dy="-3"> = 2</tspan></text>
+  </g>
+  <rect class="st29" x="233.15" y="50" width="45" height="160"/>
+  <g class="st5">
+    <text class="st18" transform="translate(238.25 58)"><tspan x="0" y="0">active set</tspan></text>
+  </g>
+  <line class="st22" x1="232.15" y1="46" x2="232.15" y2="210"/>
+  <line class="st22" x1="232.15" y1="210" x2="352.15" y2="210"/>
+  <line class="st24" x1="228.15" y1="210" x2="232.15" y2="210"/>
+  <line class="st24" x1="228.15" y1="174.82" x2="232.15" y2="174.82"/>
+  <line class="st24" x1="228.15" y1="139.64" x2="232.15" y2="139.64"/>
+  <line class="st24" x1="228.15" y1="104.46" x2="232.15" y2="104.46"/>
+  <line class="st24" x1="228.15" y1="70" x2="232.15" y2="70"/>
+  <line class="st23" x1="232.15" y1="174.82" x2="352.15" y2="174.82"/>
+  <line class="st23" x1="232.15" y1="139.64" x2="352.15" y2="139.64"/>
+  <line class="st23" x1="232.15" y1="104.46" x2="352.15" y2="104.46"/>
+  <line class="st25" x1="232.15" y1="70" x2="352.15" y2="70"/>
+  <g class="st5">
+    <text class="st14" transform="translate(354.15 73)"><tspan x="0" y="0">1/<tspan style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 11px">α</tspan></tspan></text>
+  </g>
+  <path class="st21" d="M237.15,204.26h14c.6,0,1,.4,1,1v3.74c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-3.74c0-.6.4-1,1-1Z"/>
+  <path class="st21" d="M261.15,194.92h14c.6,0,1,.4,1,1v13.08c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-13.08c0-.6.4-1,1-1Z"/>
+  <path class="st28" d="M285.15,178.41h14c.6,0,1,.4,1,1v29.59c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-29.59c0-.6.4-1,1-1Z"/>
+  <path class="st28" d="M309.15,146.82h14c.6,0,1,.4,1,1v61.18c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-61.18c0-.6.4-1,1-1Z"/>
+  <path class="st28" d="M333.15,111.64h14c.6,0,1,.4,1,1v96.36c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-96.36c0-.6.4-1,1-1Z"/>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(236.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(240.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₁</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(260.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(264.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₂</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(284.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(288.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₃</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(308.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(312.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₄</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(332.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(336.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₅</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <text class="st0" transform="translate(233.04 236)"><tspan x="0" y="0">(false)</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st7" transform="translate(412.85 24)"><tspan x="0" y="0">(c) Filtered</tspan></text>
+  </g>
+  <g class="st5">
+    <text transform="translate(400.62 39)" style="font-family: ArialMT, Arial; font-size: 10px; fill: #666"><tspan>Active set: |</tspan><tspan style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">W</tspan><tspan>|−</tspan><tspan style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">r</tspan><tspan>+1 = 3</tspan></text>
+  </g>
+  <rect class="st29" x="408.15" y="50" width="69" height="160"/>
+  <g class="st5">
+    <text class="st18" transform="translate(426.25 58)"><tspan x="0" y="0">active set</tspan></text>
+  </g>
+  <line class="st22" x1="407.15" y1="46" x2="407.15" y2="210"/>
+  <line class="st22" x1="407.15" y1="210" x2="527.15" y2="210"/>
+  <line class="st24" x1="403.15" y1="210" x2="407.15" y2="210"/>
+  <line class="st24" x1="403.15" y1="174.82" x2="407.15" y2="174.82"/>
+  <line class="st24" x1="403.15" y1="139.64" x2="407.15" y2="139.64"/>
+  <line class="st24" x1="403.15" y1="104.46" x2="407.15" y2="104.46"/>
+  <line class="st24" x1="403.15" y1="70" x2="407.15" y2="70"/>
+  <line class="st23" x1="407.15" y1="174.82" x2="527.15" y2="174.82"/>
+  <line class="st23" x1="407.15" y1="139.64" x2="527.15" y2="139.64"/>
+  <line class="st23" x1="407.15" y1="104.46" x2="527.15" y2="104.46"/>
+  <line class="st25" x1="407.15" y1="70" x2="527.15" y2="70"/>
+  <g class="st5">
+    <text class="st14" transform="translate(529.15 73)"><tspan x="0" y="0">1/<tspan style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 11px">α</tspan></tspan></text>
+  </g>
+  <path class="st26" d="M412.15,204.26h14c.6,0,1,.4,1,1v3.74c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-3.74c0-.6.4-1,1-1Z"/>
+  <path class="st21" d="M436.15,194.92h14c.6,0,1,.4,1,1v13.08c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-13.08c0-.6.4-1,1-1Z"/>
+  <path class="st21" d="M460.15,178.41h14c.6,0,1,.4,1,1v29.59c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-29.59c0-.6.4-1,1-1Z"/>
+  <path class="st28" d="M484.15,146.82h14c.6,0,1,.4,1,1v61.18c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-61.18c0-.6.4-1,1-1Z"/>
+  <path class="st28" d="M508.15,111.64h14c.6,0,1,.4,1,1v96.36c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-96.36c0-.6.4-1,1-1Z"/>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(411.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(415.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₁</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(435.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(439.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₂</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(459.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(463.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₃</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(483.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(487.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₄</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(507.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(511.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₅</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <text class="st0" transform="translate(408.04 236)"><tspan x="0" y="0">(false)</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st17" transform="translate(410.88 249)"><tspan x="0" y="0">0.04</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st3" transform="translate(434.88 249)"><tspan x="0" y="0">0.71</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st3" transform="translate(458.88 249)"><tspan x="0" y="0">0.89</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st1" transform="translate(482.88 249)"><tspan x="0" y="0">0.97</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st1" transform="translate(506.88 249)"><tspan x="0" y="0">0.99</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st12" transform="translate(431.23 261)"><tspan x="0" y="0">pos</tspan></text>
+    <text class="st12" transform="translate(444.1 261)"><tspan x="0" y="0">t</tspan></text>
+    <text class="st12" transform="translate(446.86 261)"><tspan x="0" y="0">e</tspan></text>
+    <text class="st12" transform="translate(451.12 261)"><tspan x="0" y="0">r</tspan></text>
+    <text class="st12" transform="translate(453.93 261)"><tspan x="0" y="0">ior p</tspan></text>
+    <text class="st12" transform="translate(470.01 261)"><tspan x="0" y="0">r</tspan></text>
+    <text class="st12" transform="translate(472.7 261)"><tspan x="0" y="0">o</tspan></text>
+    <text class="st10" transform="translate(477.37 261)"><tspan x="0" y="0">b</tspan></text>
+    <text class="st12" transform="translate(482 261)"><tspan x="0" y="0">. <tspan style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 10px">π</tspan></tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st4" transform="translate(490.27 263.83)" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 6px"><tspan x="0" y="0">s</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st7" transform="translate(563.29 24)"><tspan x="0" y="0">(d) Greedy Filtered</tspan></text>
+  </g>
+  <g class="st5">
+    <text transform="translate(586.27 39)" style="font-family: ArialMT, Arial; font-size: 10px; fill: #666"><tspan>Active set: </tspan><tspan style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">d</tspan><tspan dy="3" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 7px">t</tspan><tspan dy="-3"> = 2</tspan></text>
+  </g>
+  <rect class="st29" x="583.15" y="50" width="45" height="160"/>
+  <g class="st5">
+    <text class="st18" transform="translate(589.25 58)"><tspan x="0" y="0">active set</tspan></text>
+  </g>
+  <line class="st22" x1="582.15" y1="46" x2="582.15" y2="210"/>
+  <line class="st22" x1="582.15" y1="210" x2="702.15" y2="210"/>
+  <line class="st24" x1="578.15" y1="210" x2="582.15" y2="210"/>
+  <line class="st24" x1="578.15" y1="174.82" x2="582.15" y2="174.82"/>
+  <line class="st24" x1="578.15" y1="139.64" x2="582.15" y2="139.64"/>
+  <line class="st24" x1="578.15" y1="104.46" x2="582.15" y2="104.46"/>
+  <line class="st24" x1="578.15" y1="70" x2="582.15" y2="70"/>
+  <line class="st23" x1="582.15" y1="174.82" x2="702.15" y2="174.82"/>
+  <line class="st23" x1="582.15" y1="139.64" x2="702.15" y2="139.64"/>
+  <line class="st23" x1="582.15" y1="104.46" x2="702.15" y2="104.46"/>
+  <line class="st25" x1="582.15" y1="70" x2="702.15" y2="70"/>
+  <g class="st5">
+    <text class="st14" transform="translate(704.15 73)"><tspan x="0" y="0">1/<tspan style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 11px">α</tspan></tspan></text>
+  </g>
+  <path class="st26" d="M587.15,204.26h14c.6,0,1,.4,1,1v3.74c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-3.74c0-.6.4-1,1-1Z"/>
+  <path class="st21" d="M611.15,194.92h14c.6,0,1,.4,1,1v13.08c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-13.08c0-.6.4-1,1-1Z"/>
+  <path class="st28" d="M635.15,178.41h14c.6,0,1,.4,1,1v29.59c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-29.59c0-.6.4-1,1-1Z"/>
+  <path class="st28" d="M659.15,146.82h14c.6,0,1,.4,1,1v61.18c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-61.18c0-.6.4-1,1-1Z"/>
+  <path class="st28" d="M683.15,111.64h14c.6,0,1,.4,1,1v96.36c0,.6-.4,1-1,1h-14c-.6,0-1-.4-1-1v-96.36c0-.6.4-1,1-1Z"/>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(586.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(590.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₁</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(610.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(614.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₂</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(634.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(638.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₃</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(658.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(662.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₄</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <g class="st5">
+      <text class="st8" transform="translate(682.79 224)"><tspan x="0" y="0" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">s</tspan></text>
+    </g>
+    <g class="st5">
+      <text class="st9" transform="translate(686.49 224)"><tspan x="0" y="0" style="font-family: 'Times New Roman', Times, serif; font-size: 12px">₅</tspan></text>
+    </g>
+  </g>
+  <g class="st5">
+    <text class="st0" transform="translate(583.04 236)"><tspan x="0" y="0">(false)</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st17" transform="translate(585.88 249)"><tspan x="0" y="0">0.04</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st3" transform="translate(609.88 249)"><tspan x="0" y="0">0.71</tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st12" transform="translate(570.23 261)"><tspan x="0" y="0">pos</tspan></text>
+    <text class="st12" transform="translate(583.1 261)"><tspan x="0" y="0">t</tspan></text>
+    <text class="st12" transform="translate(585.86 261)"><tspan x="0" y="0">e</tspan></text>
+    <text class="st12" transform="translate(590.12 261)"><tspan x="0" y="0">r</tspan></text>
+    <text class="st12" transform="translate(592.93 261)"><tspan x="0" y="0">ior p</tspan></text>
+    <text class="st12" transform="translate(609.01 261)"><tspan x="0" y="0">r</tspan></text>
+    <text class="st12" transform="translate(611.7 261)"><tspan x="0" y="0">o</tspan></text>
+    <text class="st10" transform="translate(616.37 261)"><tspan x="0" y="0">b</tspan></text>
+    <text class="st12" transform="translate(621 261)"><tspan x="0" y="0">. <tspan style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 10px">π</tspan></tspan></text>
+  </g>
+  <g class="st5">
+    <text class="st4" transform="translate(629.27 263.83)" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 6px"><tspan x="0" y="0">s</tspan></text>
+  </g>
+  <path class="st21" d="M115.15,279h10c.6,0,1,.4,1,1v10c0,.6-.4,1-1,1h-10c-.6,0-1-.4-1-1v-10c0-.6.4-1,1-1Z"/>
+  <g class="st5">
+    <text class="st16" transform="translate(130.15 289)"><tspan x="0" y="0">Sampled this round</tspan></text>
+  </g>
+  <path class="st28" d="M265.15,279h10c.6,0,1,.4,1,1v10c0,.6-.4,1-1,1h-10c-.6,0-1-.4-1-1v-10c0-.6.4-1,1-1Z"/>
+  <g class="st5">
+    <text class="st16" transform="translate(280.15 289)"><tspan x="0" y="0">Not sampled (above cutoff)</tspan></text>
+    <text/>
+    <text/>
+  </g>
+  <path class="st26" d="M465.15,279h10c.6,0,1,.4,1,1v10c0,.6-.4,1-1,1h-10c-.6,0-1-.4-1-1v-10c0-.6.4-1,1-1Z"/>
+  <g class="st5">
+    <text class="st16" transform="translate(480.15 289)"><tspan x="0" y="0">Excluded (<tspan style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">π</tspan></tspan></text>
+    <text class="st20" transform="translate(528.84 292.33) scale(.58)" style="font-style: italic; font-family: 'Times New Roman', Times, serif"><tspan x="0" y="0">s</tspan></text>
+    <text class="st20" transform="translate(531.46 289)"><tspan x="0" y="0" xml:space="preserve"> ≤ <tspan style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 12px">τ</tspan>)</tspan></text>
+  </g>
+  <g class="st5">
+    <text transform="translate(20 150) rotate(-90)" style="font-style: italic; font-family: 'Times New Roman', Times, serif; font-size: 13px; fill: #1a1a1a"><tspan x="0" y="0">E</tspan><tspan dy="3" font-size="9">s, t</tspan></text>
+  </g>
+</svg>
