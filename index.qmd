@@ -15,6 +15,8 @@ format:
       data-background-image: "images/bg-07.png"
 ---
 
+# Overview
+
 ## Overview
 
 TODO
@@ -100,6 +102,8 @@ Replicability analysis,...
 :::
 :::::
 :::::::::
+
+# Defining hypotheses
 
 ## Hypothesis testing
 
@@ -347,6 +351,8 @@ Null hypothesis (partial conjunction): $$H_{r/\mathcal{W}}$$
 
 "fewer than $r$ seats were truly won by the winning party"
 
+# Testing hypotheses
+
 ## Testing a null hypothesis, $H_0$
 
 ::::: columns
@@ -563,6 +569,8 @@ These are all e-processes, Ville's inequality applies. (Theorem 1 in paper)
 
   - Fisher threshold is $\approx 2.3 \times 10^7$, requiring $\sim 5.7\times$ more samples :warning:
 
+# Sampling strategies
+
 ## Adaptive sampling strategies
 
 - Do sampling in 'rounds'
@@ -595,6 +603,8 @@ These are all e-processes, Ville's inequality applies. (Theorem 1 in paper)
 - Greedily focus on the 'best' $r$ seats
 - Sample only from the widest $r$ seats based on reported margin
 - Switch to the other seats once ballots are exhausted
+
+# Results
 
 ## Experimental setup {.smaller .scrollable}
 
