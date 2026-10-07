@@ -689,7 +689,7 @@ ggplot(parl_data) +
 
 - Use reported info (margins)
 
-- Determine optimal sample sizes for large-batch rounds
+- Determine optimal batch sizes for sampling rounds
 
 # Questions?
 
