@@ -27,7 +27,39 @@ Australian Research Council (ARC):
 
 ## Parliamentary majorities
 
-<!-- TODO: parliament diagram -->
+```{r}
+#| label: indian-parliament
+library(ggparliament)
+library(ggplot2)
+
+# Define election results.
+election_results <- data.frame(
+  party = c("BJP", "INC", "AIADMK", "Others"),
+  seats = c(282, 44, 37, 180),
+  color = c("#FF9933", "#19AAED", "#008000", "#C9C9C9")
+)
+
+# Compute coordinate locations for a 10-row semicircle hemicycle.
+parl_data <- parliament_data(
+  election_data = election_results,
+  type = "semicircle",
+  parl_rows = 10,
+  party_seats = election_results$seats
+)
+
+# Render diagram using ggplot2.
+indian_parliament <- ggplot(parl_data) +
+  aes(x = x, y = y, colour = party) +
+  geom_parliament_seats(size = 5, show.legend = FALSE) +
+  scale_colour_manual(values = election_results$color, limits = election_results$party) +
+  draw_majoritythreshold(n = 272, label = FALSE, type = "semicircle") +
+  theme_ggparliament()
+
+print(indian_parliament)
+```
+
+
+## Parliamentary majorities
 
 - Standard RLA: certify winner of **every seat** ($s \in \mathcal{S}$)
 
@@ -522,6 +554,13 @@ These are all e-processes, Ville's inequality applies. (Theorem 1 in paper)
 - 282 million total ballots
 - Injected 0--5 falsely reported seats (swap with runner-up)
 :::
+
+## Indian election
+
+```{r}
+print(indian_parliament)
+```
+
 
 ## Indian election
 
