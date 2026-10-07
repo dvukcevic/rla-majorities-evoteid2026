@@ -17,9 +17,21 @@ format:
 
 # Overview
 
-## Overview
+## TL;DR :fast_forward:
 
-TODO
+Government = parliamentary majority
+
+. . .
+
+Audit **every** seat $\longrightarrow$ slow :turtle:
+
+Audit the **majority** $\longrightarrow$ faster :rabbit:
+
+. . .
+
+Use **partial conjuction** testing
+
+Up to 1000$\times$ efficiency gain
 
 ## Acknowledgements :moneybag:
 
