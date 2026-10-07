@@ -208,7 +208,90 @@ Need to reject **at least one** of the complementary nulls, $\bar{S}_j$
 - $H_0\colon$"at least $|\mathcal{S}| - r + 1$ statements are false"
 - $H_1\colon$"**at least** $r$ statements are true"
 
-<!-- TODO: diagram of (|S| - r + 1) + (r - 1) items -->
+```{r}
+#| label: partial-conjuction-diagram
+#| fig-width: 10
+#| fig-height: 1.5
+#| out-width: 100%
+
+library(ggplot2)
+library(latex2exp)
+
+# Diagram configuration parameters
+total_items <- 16  # Total items in set |S|
+r <- 10            # Number of items in group 'r'
+
+# Data frame representing the items in a line
+df_items <- data.frame(
+  x = 1:total_items,
+  y = 0,
+  # First r items are filled black, remaining items are hollow white
+  fill_group = factor(ifelse(1:total_items <= r, "Group_R", "Group_Remaining"))
+)
+
+# Geometry offsets for brackets and text labels
+y_dot <- 0
+bracket_tick_height <- 0.3 # Vertical tick length for brackets
+gap <- 0.48                # Clearance gap between circles and brackets
+label_distance <- 0.35     # Gap between bracket and its label
+
+# Bottom bracket parameters (spans x = 1 to x = r)
+bottom_y_base  <- y_dot - gap
+bottom_y_tip   <- bottom_y_base - bracket_tick_height
+bottom_label_y <- bottom_y_tip - label_distance
+
+# Top bracket parameters (spans x = r to x = total_items)
+top_y_base  <- y_dot + gap
+top_y_tip   <- top_y_base + bracket_tick_height
+top_label_y <- top_y_tip + label_distance
+
+p <- ggplot() +
+  # 1. Render items as circles (solid for first r, hollow for the rest)
+  geom_point(
+    data = df_items, 
+    aes(x = x, y = y, fill = fill_group), 
+    shape = 21, 
+    color = "green3", 
+    size = 4.5, 
+    stroke = 1.2
+  ) +
+  scale_fill_manual(values = c("Group_R" = "green3", "Group_Remaining" = "white")) +
+
+  # 2. Draw Bottom Bracket [1 to r]
+  # Horizontal bar
+  annotate("segment", x = 1, xend = r, y = bottom_y_tip,  yend = bottom_y_tip, linewidth = 0.8) +
+  # Left tick mark
+  annotate("segment", x = 1, xend = 1, y = bottom_y_base, yend = bottom_y_tip, linewidth = 0.8) +
+  # Right tick mark
+  annotate("segment", x = r, xend = r, y = bottom_y_base, yend = bottom_y_tip, linewidth = 0.8) +
+  # Label 'r'
+  annotate("text", x = (1 + r) / 2, y = bottom_label_y, label = TeX("$r$"), size = 6) +
+
+  # 3. Draw Top Bracket [r to |S|]
+  # Horizontal bar
+  annotate("segment", x = r, xend = total_items, y = top_y_tip, yend = top_y_tip, linewidth = 0.8) +
+  # Left tick mark
+  annotate("segment", x = r, xend = r, y = top_y_base, yend = top_y_tip, linewidth = 0.8) +
+  # Right tick mark
+  annotate("segment", x = total_items, xend = total_items, y = top_y_base, yend = top_y_tip, linewidth = 0.8) +
+  # Label '|S| - r + 1'
+  annotate("text", x = (r + total_items) / 2, y = top_label_y, label = TeX("$|S| - r + 1$"), size = 5.5) +
+
+  # 4. Axes & Aspect Ratio Styling
+  coord_fixed(ratio = 1) +
+  scale_x_continuous(limits = c(0.3, total_items + 0.7)) +
+  scale_y_continuous(limits = c(-1.3, 1.3)) +
+
+  # Minimal transparent/clean theme
+  theme_void() +
+  theme(
+    legend.position = "none",
+    plot.background = element_rect(fill = "white", color = NA),
+    plot.title = element_text(margin = margin(b = 25))
+  )
+
+print(p)
+```
 
 . . .
 
