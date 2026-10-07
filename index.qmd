@@ -543,7 +543,13 @@ $E_{(1),t} \leqslant E_{(2),t} \leqslant \dots$ are the **order statistics** of 
 These are all e-processes, Ville's inequality applies. (Theorem 1 in paper)
 :::
 
-<!-- TODO: show plots and animations of seat-level processes -->
+
+## 
+
+::: {.r-stretch}
+<iframe src="seat_level_e_process_dynamics_visualizer.html" width="100%" height="100%" style="border:none; border-radius:12px;"></iframe>
+:::
+
 
 ## E-processes vs. Fisher combination {.smaller}
 

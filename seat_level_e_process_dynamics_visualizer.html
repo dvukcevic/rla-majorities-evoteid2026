@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seat-Level E-Process Dynamics Visualizer</title>
+    <!-- Tailwind CSS for modern presentation styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- D3.js v7 for interactive and animated charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #090d16;
+            color: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+        .tab-btn.active {
+            border-color: #6366f1;
+            color: #818cf8;
+            background-color: rgba(99, 102, 241, 0.15);
+        }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex flex-col justify-between p-3 bg-slate-950 text-slate-100">
+
+    <!-- Header Dashboard -->
+    <header class="flex flex-wrap items-center justify-between gap-3 p-3 bg-slate-900/90 border border-slate-800 rounded-xl shadow-xl backdrop-blur-md">
+        <div class="flex items-center gap-3">
+            <div class="p-2.5 bg-indigo-600/30 border border-indigo-500/40 rounded-lg text-indigo-400">
+                <i class="fa-solid fa-chart-line text-xl"></i>
+            </div>
+            <div>
+                <h1 class="text-base font-bold tracking-tight text-white flex items-center gap-2">
+                    Sequential E-Process Dynamics & Majority Assembly
+                    <span id="presetBadge" class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                        Uniform Ballots Sampling
+                    </span>
+                </h1>
+                <p class="text-xs text-slate-400">Illustrating seat-level processes <i>E</i><sub><i>s,t</i></sub> and partial conjunction product <i>E</i><sub><i>r/W,t</i></sub> over sampled ballots</p>
+            </div>
+        </div>
+
+        <!-- Metric Badges -->
+        <div class="flex items-center gap-2.5">
+            <div class="px-3 py-1 bg-slate-800/80 border border-slate-700/60 rounded-lg text-center min-w-[85px]">
+                <div class="text-[9px] uppercase tracking-wider text-slate-400 font-medium">Ballots (<i>t</i>)</div>
+                <div id="metricRound" class="text-base font-mono font-bold text-indigo-400">0</div>
+            </div>
+            <div class="px-3 py-1 bg-slate-800/80 border border-slate-700/60 rounded-lg text-center min-w-[100px]">
+                <div class="text-[9px] uppercase tracking-wider text-slate-400 font-medium">Bottom <i>k</i> Product</div>
+                <div id="metricErW" class="text-base font-mono font-bold text-amber-400">1.00</div>
+            </div>
+            <div class="px-3 py-1 bg-slate-800/80 border border-slate-700/60 rounded-lg text-center min-w-[90px]">
+                <div class="text-[9px] uppercase tracking-wider text-slate-400 font-medium">Target (1/&alpha;)</div>
+                <div id="metricTarget" class="text-base font-mono font-bold text-emerald-400">20.00</div>
+            </div>
+            <div class="px-3 py-1 bg-slate-800/80 border border-slate-700/60 rounded-lg text-center min-w-[75px]">
+                <div class="text-[9px] uppercase tracking-wider text-slate-400 font-medium">Seed</div>
+                <div id="metricSeed" class="text-base font-mono font-bold text-cyan-400">42</div>
+            </div>
+            <div id="certifiedBadge" class="hidden px-3 py-1.5 bg-emerald-500/20 border border-emerald-500/50 rounded-lg text-emerald-300 font-bold text-xs uppercase tracking-wider animate-pulse flex items-center gap-1.5">
+                <i class="fa-solid fa-circle-check text-emerald-400"></i> Majority Certified
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="flex-1 my-2.5 grid grid-cols-12 gap-3 min-h-0">
+
+        <!-- Left Control Sidebar -->
+        <aside class="col-span-3 bg-slate-900/70 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between overflow-y-auto custom-scrollbar">
+            <div class="space-y-3.5">
+                <!-- Preset Configurations -->
+                <div>
+                    <label class="text-[11px] font-semibold uppercase text-slate-400 tracking-wider block mb-1.5">Preset Scenario</label>
+                    <select id="presetSelect" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-medium text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <option value="clean">1. Clean Sweep (All Seats True Winners)</option>
+                        <option value="marginal">2. Tight Election (Low Margins)</option>
+                        <option value="one_false">3. Single Corrupted / False Seat</option>
+                        <option value="hetero">4. Heterogeneous Margins</option>
+                    </select>
+                </div>
+
+                <!-- View Mode Tabs -->
+                <div>
+                    <label class="text-[11px] font-semibold uppercase text-slate-400 tracking-wider block mb-1.5">Visualization View</label>
+                    <div class="grid grid-cols-3 gap-1 bg-slate-800/80 p-1 rounded-lg border border-slate-700/60">
+                        <button id="tabTraj" class="tab-btn active px-2 py-1 rounded text-[11px] font-semibold transition text-center">Trajectories</button>
+                        <button id="tabOrder" class="tab-btn px-2 py-1 rounded text-[11px] font-semibold transition text-center">Order Stats</button>
+                        <button id="tabAnimated" class="tab-btn px-2 py-1 rounded text-[11px] font-semibold transition text-center">Rank Motion</button>
+                    </div>
+                </div>
+
+                <!-- Parameters Controls -->
+                <div class="p-3 bg-slate-800/40 border border-slate-700/50 rounded-lg space-y-2.5">
+                    <div class="text-xs font-semibold text-slate-300 border-b border-slate-700/50 pb-1 flex justify-between">
+                        <span>Election Parameters</span>
+                        <i class="fa-solid fa-sliders text-slate-400"></i>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-400">Reported Seats (|<i>W</i>|):</span>
+                        <span id="lblW" class="font-mono font-bold text-indigo-400">8</span>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-400">Target Majority (<i>r</i>):</span>
+                        <span id="lblR" class="font-mono font-bold text-indigo-400">5</span>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-400">Bottom <i>k</i> (|<i>W</i>| &minus; <i>r</i> + 1):</span>
+                        <span id="lblK" class="font-mono font-bold text-amber-400">4</span>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-400">Risk Limit (&alpha;):</span>
+                        <span class="font-mono font-bold text-emerald-400">0.05</span>
+                    </div>
+                </div>
+
+                <!-- Display Scale Toggle -->
+                <div>
+                    <label class="text-[11px] font-semibold uppercase text-slate-400 tracking-wider block mb-1">Scale Mode</label>
+                    <div class="grid grid-cols-2 gap-1.5">
+                        <button id="btnLog" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-600 text-white border border-indigo-500 shadow-sm">Log Scale</button>
+                        <button id="btnLinear" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700">Linear Scale</button>
+                    </div>
+                </div>
+
+                <!-- Explanatory Box -->
+                <div id="infoBox" class="p-2.5 bg-indigo-950/30 border border-indigo-800/40 rounded-lg text-[11px] text-indigo-200 leading-relaxed space-y-1">
+                    <p><strong>Seat Processes (<i>E</i><sub><i>s,t</i></sub>):</strong> Updated sequentially with each sampled ballot via ALPHA betting multipliers.</p>
+                    <p><strong>Rank Motion View:</strong> Smoothly animates seat bars horizontally as order statistics <i>E</i><sub>(1)</sub> &le; <i>E</i><sub>(2)</sub> &hellip; shift across time.</p>
+                </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-800 text-[10px] text-slate-500 text-center">
+                E-Vote-ID 2026 Presentation Visualizer
+            </div>
+        </aside>
+
+        <!-- Right Main Graphics Panel -->
+        <section class="col-span-9 bg-slate-900/70 border border-slate-800 rounded-xl p-3.5 flex flex-col justify-between relative overflow-hidden">
+            
+            <!-- View 1: Trajectory Curves (Time Series) -->
+            <div id="viewTrajectories" class="view-panel w-full h-full flex flex-col gap-2">
+                <div class="text-xs font-bold text-slate-300 flex items-center justify-between border-b border-slate-800 pb-1">
+                    <span>Individual Seat Trajectories <i>E</i><sub><i>s,t</i></sub> vs Majority Statistic <i>E</i><sub><i>r/W,t</i></sub></span>
+                    <span class="text-[10px] font-normal text-slate-400">Dashed gold curve = <i>E</i><sub><i>r/W,t</i></sub> | Horizontal green line = Target 1/&alpha;</span>
+                </div>
+                <div id="trajChartContainer" class="flex-1 w-full relative">
+                    <svg id="trajSvg" class="w-full h-full overflow-visible"></svg>
+                </div>
+            </div>
+
+            <!-- View 2: Order Statistics Bar Chart -->
+            <div id="viewOrderStats" class="view-panel hidden w-full h-full flex flex-col gap-2">
+                <div class="text-xs font-bold text-slate-300 flex items-center justify-between border-b border-slate-800 pb-1">
+                    <span>Sorted Order Statistics at Round <i>t</i>: <i>E</i><sub>(1),<i>t</i></sub> &le; <i>E</i><sub>(2),<i>t</i></sub> &le; &hellip; &le; <i>E</i><sub>(|<i>W</i>|),<i>t</i></sub></span>
+                    <span class="text-[10px] text-amber-400 font-semibold">Amber Bars = Bottom <i>k</i> Seats included in Product</span>
+                </div>
+                
+                <div id="orderChartContainer" class="flex-1 w-full relative">
+                    <svg id="orderSvg" class="w-full h-full overflow-visible"></svg>
+                </div>
+
+                <!-- Product Math Display Bar -->
+                <div id="productMathBar" class="p-2 bg-slate-800/80 border border-slate-700/60 rounded-lg text-xs font-mono flex items-center justify-between overflow-x-auto">
+                    <span class="text-slate-400">Product Calculation:</span>
+                    <span id="mathFormulaText" class="text-amber-300 font-bold"><i>E</i><sub><i>r/W,t</i></sub> = <i>E</i><sub>(1)</sub> &times; <i>E</i><sub>(2)</sub> &times; &hellip; = 1.00</span>
+                </div>
+            </div>
+
+            <!-- View 3: Animated Seat Rank Motion (Smooth FLIP reordering) -->
+            <div id="viewAnimated" class="view-panel hidden w-full h-full flex flex-col gap-2 overflow-hidden">
+                <div class="text-xs font-bold text-slate-300 flex items-center justify-between border-b border-slate-800 pb-1">
+                    <span>Dynamic Seat Rank Motion & Smooth Horizontal Reordering</span>
+                    <span class="text-[10px] text-indigo-400 font-mono">Bars smoothly slide horizontally as order statistics shift</span>
+                </div>
+
+                <div id="animatedChartContainer" class="flex-1 w-full relative">
+                    <svg id="animatedSvg" class="w-full h-full overflow-visible"></svg>
+                </div>
+
+                <div class="p-2 bg-slate-800/80 border border-slate-700/60 rounded-lg text-xs font-mono flex items-center justify-between">
+                    <span class="text-slate-400">Active Rank Dynamics:</span>
+                    <span class="text-cyan-300">Bars automatically re-arrange from smallest to largest value as sampling advances</span>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Bottom Control Playbar -->
+    <footer class="p-3 bg-slate-900/90 border border-slate-800 rounded-xl flex items-center gap-3 shadow-xl">
+        <button id="btnPlayPause" class="w-9 h-9 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white flex items-center justify-center transition focus:outline-none shadow-lg shadow-indigo-600/30">
+            <i id="playIcon" class="fa-solid fa-play text-sm"></i>
+        </button>
+
+        <button id="btnReset" class="px-3 h-9 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center gap-1.5 transition border border-slate-700 text-xs font-medium" title="Generate New Random Instance Seed">
+            <i class="fa-solid fa-dice text-indigo-400 text-sm"></i> Reset / New Seed
+        </button>
+
+        <button id="btnStep" class="w-9 h-9 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition border border-slate-700" title="Step +1 Ballot">
+            <i class="fa-solid fa-forward-step text-sm"></i>
+        </button>
+
+        <!-- Scrubber Slider -->
+        <div class="flex-1 flex items-center gap-2.5">
+            <span class="text-xs font-mono text-slate-400">t=0</span>
+            <input id="timeSlider" type="range" min="0" max="300" value="0" step="1" class="w-full accent-indigo-500 bg-slate-800 h-2 rounded-lg cursor-pointer">
+            <span class="text-xs font-mono text-slate-400">t=300</span>
+        </div>
+
+        <!-- Speed Selector -->
+        <div class="flex items-center gap-1 bg-slate-800 p-1 rounded-lg border border-slate-700">
+            <button data-speed="600" class="btnSpeed px-2 py-0.5 rounded text-xs font-medium text-slate-400 hover:text-white">0.5x</button>
+            <button data-speed="300" class="btnSpeed px-2 py-0.5 rounded text-xs font-medium bg-indigo-600 text-white shadow-sm">1x</button>
+            <button data-speed="120" class="btnSpeed px-2 py-0.5 rounded text-xs font-medium text-slate-400 hover:text-white">2.5x</button>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic & Simulation Engine -->
+    <script>
+        // --- Simulation Constants & State ---
+        const TOTAL_SEATS_W = 8;
+        const R_TARGET = 5;
+        const K_SUBSET = TOTAL_SEATS_W - R_TARGET + 1; // 8 - 5 + 1 = 4
+        const ALPHA_LIMIT = 0.05;
+        const CERT_THRESHOLD = 1 / ALPHA_LIMIT; // 20
+        const MAX_BALLOTS = 300;
+
+        let currentRound = 0;
+        let isPlaying = false;
+        let animInterval = null;
+        let animSpeed = 300;
+        let useLogScale = true;
+        let currentPreset = "clean";
+        let activeView = "trajectories";
+        let currentSeed = 1;
+
+        // Seat metadata and generated datasets
+        let seatsData = [];
+
+        // Seeded Pseudo-Random Number Generator
+        function pseudoRandom(seed) {
+            let x = Math.sin(seed++) * 10000;
+            return x - Math.floor(x);
+        }
+
+        // Generate synthetic election data with accelerated evidence growth for true winners
+        function generateElectionData() {
+            let randSeed = currentSeed;
+            const seats = [];
+
+            // Define seat parameters based on current preset
+            for (let s = 1; s <= TOTAL_SEATS_W; s++) {
+                let trueMargin = 0.62; // Default winning share > 0.5
+                let isFalseSeat = false;
+
+                if (currentPreset === "clean") {
+                    trueMargin = 0.58 + (s % 4) * 0.05;
+                } else if (currentPreset === "marginal") {
+                    trueMargin = 0.54 + (s % 3) * 0.025;
+                } else if (currentPreset === "one_false") {
+                    if (s === 2) {
+                        trueMargin = 0.44; // Falsely reported winner! True vote share is 44%
+                        isFalseSeat = true;
+                    } else {
+                        trueMargin = 0.60 + (s % 3) * 0.05;
+                    }
+                } else if (currentPreset === "hetero") {
+                    const margins = [0.55, 0.62, 0.70, 0.78, 0.56, 0.82, 0.65, 0.72];
+                    trueMargin = margins[s - 1] || 0.62;
+                }
+
+                seats.push({
+                    id: `seat_${s}`,
+                    code: `Seat ${s}`,
+                    trueMargin: trueMargin,
+                    isFalseSeat: isFalseSeat,
+                    ballots: [],
+                    history: []
+                });
+            }
+
+            // Simulate ballot-by-ballot sampling for every seat
+            seats.forEach((seat) => {
+                let E_val = 1.0;
+                let N_total = 5000; // Seat population size
+                let K_remaining_winner = Math.floor(N_total * seat.trueMargin);
+                let N_remaining = N_total;
+
+                // Initial state at t = 0
+                seat.history[0] = {
+                    t: 0,
+                    E_val: 1.0,
+                    X_i: null,
+                    mu_i: 0.5,
+                    lambda_i: 0.15,
+                    multiplier: 1.0
+                };
+
+                for (let i = 1; i <= MAX_BALLOTS; i++) {
+                    // Sample ballot X_i
+                    const p_draw = K_remaining_winner / N_remaining;
+                    const rVal = pseudoRandom(randSeed++);
+                    const X_i = rVal < p_draw ? 1.0 : 0.0;
+
+                    // Update remaining counts
+                    if (X_i === 1.0) K_remaining_winner--;
+                    N_remaining--;
+
+                    // ALPHA Betting parameters
+                    const mu_i = 0.5;
+
+                    // Truncated shrinkage estimator for lambda_i
+                    const eta_0 = 0.52;
+                    const d_param = 30;
+                    const past_mean = i === 1 ? eta_0 : (seat.ballots.reduce((a, b) => a + b, 0) + d_param * eta_0) / (i - 1 + d_param);
+                    const eta_i = Math.max(mu_i + 0.001, Math.min(0.99, past_mean));
+                    const lambda_i = 1.0 * (eta_i - mu_i) / (mu_i * (1 - mu_i));
+
+                    // Sequential process multiplier
+                    const mult = 1 + lambda_i * (X_i - mu_i);
+                    E_val = Math.max(0.0001, E_val * mult);
+
+                    seat.ballots.push(X_i);
+                    seat.history[i] = {
+                        t: i,
+                        E_val: E_val,
+                        X_i: X_i,
+                        mu_i: mu_i,
+                        lambda_i: lambda_i,
+                        multiplier: mult
+                    };
+                }
+            });
+
+            return seats;
+        }
+
+        // Calculate majority product statistic E_{r/W,t} at time t
+        function calculateMajorityAtRound(t) {
+            const currentVals = seatsData.map(s => s.history[t].E_val);
+            currentVals.sort((a, b) => a - b);
+            
+            // Product of bottom k elements
+            let prod = 1.0;
+            for (let i = 0; i < K_SUBSET; i++) {
+                prod *= currentVals[i];
+            }
+            return prod;
+        }
+
+        // 1. Trajectories Line Chart (View 1)
+        function renderTrajectoriesChart() {
+            const container = document.getElementById("trajChartContainer");
+            const svg = d3.select("#trajSvg");
+            svg.selectAll("*").remove();
+
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            const margin = { top: 20, right: 30, bottom: 35, left: 55 };
+
+            // X Scale
+            const xScale = d3.scaleLinear().domain([0, MAX_BALLOTS]).range([margin.left, width - margin.right]);
+
+            // Y Scale
+            let allVals = [];
+            seatsData.forEach(s => s.history.forEach(h => allVals.push(h.E_val)));
+            for (let t = 0; t <= MAX_BALLOTS; t++) {
+                allVals.push(calculateMajorityAtRound(t));
+            }
+
+            const maxVal = 100  // Math.max(100, d3.max(allVals) * 1.5);
+
+            const yScale = useLogScale
+                ? d3.scaleLog().domain([0.01, maxVal]).range([height - margin.bottom, margin.top]).nice()
+                : d3.scaleLinear().domain([0, maxVal]).range([height - margin.bottom, margin.top]).nice();
+
+            // Threshold line at 1/alpha = 20
+            const threshY = yScale(CERT_THRESHOLD);
+            if (threshY >= margin.top && threshY <= height - margin.bottom) {
+                svg.append("line")
+                    .attr("x1", margin.left)
+                    .attr("x2", width - margin.right)
+                    .attr("y1", threshY)
+                    .attr("y2", threshY)
+                    .attr("stroke", "#10b981")
+                    .attr("stroke-width", 1.5)
+                    .attr("stroke-dasharray", "4 4");
+
+                svg.append("text")
+                    .attr("x", width - margin.right - 5)
+                    .attr("y", threshY - 5)
+                    .attr("fill", "#10b981")
+                    .attr("text-anchor", "end")
+                    .attr("font-size", "10px")
+                    .attr("font-weight", "bold")
+                    .text("Target 1/α = 20");
+            }
+
+            // Draw individual seat trajectory lines
+            const lineGenerator = d3.line()
+                .x(d => xScale(d.t))
+                .y(d => yScale(d.E_val))
+                .curve(d3.curveMonotoneX);
+
+            seatsData.forEach((seat, idx) => {
+                const subHistory = seat.history.slice(0, currentRound + 1);
+                
+                svg.append("path")
+                    .datum(subHistory)
+                    .attr("fill", "none")
+                    .attr("stroke", seat.isFalseSeat ? "#f43f5e" : d3.schemeCategory10[idx % 10])
+                    .attr("stroke-width", seat.isFalseSeat ? 2.5 : 1.8)
+                    .attr("stroke-opacity", 0.75)
+                    .attr("d", lineGenerator);
+
+                const currState = seat.history[currentRound];
+                svg.append("circle")
+                    .attr("cx", xScale(currState.t))
+                    .attr("cy", yScale(currState.E_val))
+                    .attr("r", 3.5)
+                    .attr("fill", seat.isFalseSeat ? "#f43f5e" : d3.schemeCategory10[idx % 10]);
+            });
+
+            // Draw Majority Process trajectory line E_{r/W,t} (Gold Line)
+            const majHistory = [];
+            for (let t = 0; t <= currentRound; t++) {
+                majHistory.push({ t: t, E_val: calculateMajorityAtRound(t) });
+            }
+
+            svg.append("path")
+                .datum(majHistory)
+                .attr("fill", "none")
+                .attr("stroke", "#f59e0b")
+                .attr("stroke-width", 3)
+                .attr("stroke-dasharray", "5 3")
+                .attr("d", lineGenerator);
+
+            svg.append("circle")
+                .attr("cx", xScale(currentRound))
+                .attr("cy", yScale(calculateMajorityAtRound(currentRound)))
+                .attr("r", 5)
+                .attr("fill", "#f59e0b")
+                .attr("stroke", "#ffffff")
+                .attr("stroke-width", 1.5);
+
+            // Axes
+            const xAxis = d3.axisBottom(xScale).ticks(8);
+            const yAxis = useLogScale ? d3.axisLeft(yScale).ticks(5, "~g") : d3.axisLeft(yScale).ticks(5);
+
+            svg.append("g")
+                .attr("transform", `translate(0, ${height - margin.bottom})`)
+                .call(xAxis)
+                .attr("color", "#64748b")
+                .selectAll("text")
+                .attr("font-size", "10px");
+
+            svg.append("g")
+                .attr("transform", `translate(${margin.left}, 0)`)
+                .call(yAxis)
+                .attr("color", "#64748b")
+                .selectAll("text")
+                .attr("font-size", "10px");
+        }
+
+        // 2. Order Statistics Bar Chart (View 2)
+        function renderOrderStatsChart() {
+            const container = document.getElementById("orderChartContainer");
+            const svg = d3.select("#orderSvg");
+            svg.selectAll("*").remove();
+
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            const margin = { top: 25, right: 30, bottom: 40, left: 55 };
+
+            const currentSeats = seatsData.map(s => ({
+                id: s.id,
+                code: s.code,
+                isFalseSeat: s.isFalseSeat,
+                E_val: s.history[currentRound].E_val
+            }));
+
+            currentSeats.sort((a, b) => a.E_val - b.E_val);
+            currentSeats.forEach((d, i) => { d.rank = i + 1; });
+
+            const xScale = d3.scaleBand()
+                .domain(d3.range(1, TOTAL_SEATS_W + 1))
+                .range([margin.left, width - margin.right])
+                .padding(0.25);
+
+            const maxVal = Math.max(100, d3.max(currentSeats, d => d.E_val) * 1.5);
+            const yScale = useLogScale
+                ? d3.scaleLog().domain([0.01, maxVal]).range([height - margin.bottom, margin.top]).nice()
+                : d3.scaleLinear().domain([0, maxVal]).range([height - margin.bottom, margin.top]).nice();
+
+            // Highlight Bottom-k Box
+            const kCutX = xScale(K_SUBSET) + xScale.bandwidth() + xScale.step() * 0.1;
+            svg.append("rect")
+                .attr("x", margin.left - 4)
+                .attr("y", margin.top - 8)
+                .attr("width", kCutX - margin.left + 4)
+                .attr("height", height - margin.bottom - margin.top + 12)
+                .attr("fill", "rgba(245, 158, 11, 0.06)")
+                .attr("stroke", "rgba(245, 158, 11, 0.3)")
+                .attr("stroke-dasharray", "4 4")
+                .attr("rx", 6);
+
+            svg.append("text")
+                .attr("x", margin.left + 6)
+                .attr("y", margin.top - 12)
+                .attr("fill", "#f59e0b")
+                .attr("font-size", "10px")
+                .attr("font-weight", "bold")
+                .text(`Bottom k = ${K_SUBSET} Seats (Included in Product E_r/W,t)`);
+
+            // Bars
+            svg.selectAll(".seat-bar")
+                .data(currentSeats)
+                .enter()
+                .append("rect")
+                .attr("class", "seat-bar")
+                .attr("x", d => xScale(d.rank))
+                .attr("width", xScale.bandwidth())
+                .attr("y", d => yScale(d.E_val))
+                .attr("height", d => Math.max(2, height - margin.bottom - yScale(d.E_val)))
+                .attr("rx", 4)
+                .attr("fill", d => {
+                    if (d.isFalseSeat) return "#f43f5e";
+                    if (d.rank <= K_SUBSET) return "#f59e0b";
+                    return "#6366f1";
+                })
+                .attr("fill-opacity", d => d.rank <= K_SUBSET ? 0.9 : 0.5);
+
+            // Value Labels
+            svg.selectAll(".val-lbl")
+                .data(currentSeats)
+                .enter()
+                .append("text")
+                .attr("class", "val-lbl")
+                .attr("x", d => xScale(d.rank) + xScale.bandwidth() / 2)
+                .attr("y", d => yScale(d.E_val) - 5)
+                .attr("text-anchor", "middle")
+                .attr("font-size", "10px")
+                .attr("font-weight", "bold")
+                .attr("fill", d => d.rank <= K_SUBSET ? "#fbbf24" : "#94a3b8")
+                .text(d => d.E_val >= 10 ? d.E_val.toFixed(1) : d.E_val.toFixed(2));
+
+            // Rank X-Axis Labels
+            svg.selectAll(".rank-lbl")
+                .data(currentSeats)
+                .enter()
+                .append("text")
+                .attr("x", d => xScale(d.rank) + xScale.bandwidth() / 2)
+                .attr("y", height - margin.bottom + 16)
+                .attr("text-anchor", "middle")
+                .attr("font-size", "10px")
+                .attr("font-weight", "bold")
+                .attr("fill", d => d.rank <= K_SUBSET ? "#f59e0b" : "#64748b")
+                .text(d => `E(${d.rank})`);
+
+            // Y-Axis
+            const yAxis = useLogScale ? d3.axisLeft(yScale).ticks(5, "~g") : d3.axisLeft(yScale).ticks(5);
+            svg.append("g")
+                .attr("transform", `translate(${margin.left}, 0)`)
+                .call(yAxis)
+                .attr("color", "#64748b")
+                .selectAll("text")
+                .attr("font-size", "10px");
+
+            // Update Math Formula
+            const bottomKFactors = currentSeats.slice(0, K_SUBSET).map(d => d.E_val.toFixed(2));
+            const prodVal = calculateMajorityAtRound(currentRound);
+            document.getElementById("mathFormulaText").innerHTML = 
+                `<i>E</i><sub><i>r/W,${currentRound}</i></sub> = ${bottomKFactors.join(" &times; ")} = <span class="${prodVal >= CERT_THRESHOLD ? 'text-emerald-400' : 'text-amber-400'}">${prodVal.toFixed(2)}</span>`;
+        }
+
+        // 3. Dynamic Seat Rank Motion Chart (View 3 - Animated Smooth FLIP Reordering)
+        function renderAnimatedChart() {
+            const container = document.getElementById("animatedChartContainer");
+            const svg = d3.select("#animatedSvg");
+
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            const margin = { top: 35, right: 30, bottom: 40, left: 55 };
+
+            svg.attr("width", width).attr("height", height);
+
+            // Extract current state for all seats at round currentRound
+            const currentSeats = seatsData.map(s => ({
+                id: s.id,
+                code: s.code,
+                isFalseSeat: s.isFalseSeat,
+                E_val: s.history[currentRound].E_val
+            }));
+
+            // Sort ascending by process value to calculate dynamic ranks
+            currentSeats.sort((a, b) => a.E_val - b.E_val);
+            currentSeats.forEach((d, i) => { d.rank = i; });
+
+            const xScale = d3.scaleBand()
+                .domain(d3.range(TOTAL_SEATS_W))
+                .range([margin.left, width - margin.right])
+                .padding(0.22);
+
+            let allVals = seatsData.map(s => s.history[currentRound].E_val);
+            const maxVal = Math.max(100, d3.max(allVals) * 1.5);
+
+            const yScale = useLogScale
+                ? d3.scaleLog().domain([0.01, maxVal]).range([height - margin.bottom, margin.top]).nice()
+                : d3.scaleLinear().domain([0, maxVal]).range([height - margin.bottom, margin.top]).nice();
+
+            // Threshold reference
+            let gThresh = svg.select(".thresh-group");
+            if (gThresh.empty()) gThresh = svg.append("g").attr("class", "thresh-group");
+            gThresh.selectAll("*").remove();
+
+            const threshY = yScale(CERT_THRESHOLD);
+            if (threshY >= margin.top && threshY <= height - margin.bottom) {
+                gThresh.append("line")
+                    .attr("x1", margin.left)
+                    .attr("x2", width - margin.right)
+                    .attr("y1", threshY)
+                    .attr("y2", threshY)
+                    .attr("stroke", "#10b981")
+                    .attr("stroke-width", 2)
+                    .attr("stroke-dasharray", "5 4");
+
+                gThresh.append("text")
+                    .attr("x", width - margin.right - 10)
+                    .attr("y", threshY - 6)
+                    .attr("fill", "#10b981")
+                    .attr("text-anchor", "end")
+                    .attr("font-size", "11px")
+                    .attr("font-weight", "bold")
+                    .text("Certification Cutoff (1/α = 20)");
+            }
+
+            // Bottom-k highlight box
+            const kCutX = xScale(K_SUBSET - 1) + xScale.bandwidth() + xScale.step() * 0.11;
+            gThresh.append("rect")
+                .attr("x", margin.left - 4)
+                .attr("y", margin.top - 10)
+                .attr("width", kCutX - margin.left + 4)
+                .attr("height", height - margin.bottom - margin.top + 15)
+                .attr("fill", "rgba(245, 158, 11, 0.05)")
+                .attr("stroke", "rgba(245, 158, 11, 0.3)")
+                .attr("stroke-dasharray", "4 4")
+                .attr("rx", 6);
+
+            gThresh.append("text")
+                .attr("x", margin.left + 8)
+                .attr("y", margin.top - 16)
+                .attr("fill", "#f59e0b")
+                .attr("font-size", "10px")
+                .attr("font-weight", "bold")
+                .text(`Bottom k = ${K_SUBSET} Active Window`);
+
+            let gBars = svg.select(".bars-layer");
+            if (gBars.empty()) gBars = svg.append("g").attr("class", "bars-layer");
+
+            // Smooth FLIP Transition setup
+            const transDuration = isPlaying ? Math.min(350, animSpeed * 0.9) : 250;
+            const t = svg.transition().duration(transDuration).ease(d3.easeCubicOut);
+
+            // Data join key by seat unique ID to enable horizontal sliding
+            const bars = gBars.selectAll(".moving-bar-group")
+                .data(currentSeats, d => d.id);
+
+            bars.exit().remove();
+
+            const enterBars = bars.enter()
+                .append("g")
+                .attr("class", "moving-bar-group")
+                .attr("transform", d => `translate(${xScale(d.rank)}, 0)`);
+
+            enterBars.append("rect")
+                .attr("class", "bar-rect")
+                .attr("rx", 5)
+                .attr("x", 0)
+                .attr("width", xScale.bandwidth())
+                .attr("y", height - margin.bottom)
+                .attr("height", 0);
+
+            enterBars.append("text")
+                .attr("class", "bar-code-label")
+                .attr("text-anchor", "middle")
+                .attr("font-size", "11px")
+                .attr("font-weight", "bold");
+
+            enterBars.append("text")
+                .attr("class", "bar-val-label")
+                .attr("text-anchor", "middle")
+                .attr("font-size", "10px")
+                .attr("font-weight", "bold");
+
+            const allBars = enterBars.merge(bars);
+
+            // Smoothly slide group to new X rank position
+            allBars.transition(t)
+                .attr("transform", d => `translate(${xScale(d.rank)}, 0)`);
+
+            // Smoothly update bar rect dimensions and colors
+            allBars.select(".bar-rect")
+                .transition(t)
+                .attr("x", 0)
+                .attr("width", xScale.bandwidth())
+                .attr("y", d => yScale(d.E_val))
+                .attr("height", d => Math.max(3, height - margin.bottom - yScale(d.E_val)))
+                .attr("fill", d => {
+                    if (d.isFalseSeat) return "#f43f5e";
+                    if (d.rank < K_SUBSET) return "#f59e0b"; // Amber for bottom k
+                    return "#6366f1"; // Indigo
+                })
+                .attr("fill-opacity", d => d.rank < K_SUBSET ? 0.95 : 0.6)
+                .attr("stroke", d => d.rank < K_SUBSET ? "#fbbf24" : "none")
+                .attr("stroke-width", d => d.rank < K_SUBSET ? 1.5 : 0);
+
+            // Smoothly update Code Labels
+            allBars.select(".bar-code-label")
+                .text(d => d.code)
+                .attr("x", xScale.bandwidth() / 2)
+                .attr("y", height - margin.bottom + 18)
+                .attr("fill", d => d.rank < K_SUBSET ? "#f59e0b" : "#94a3b8");
+
+            // Smoothly update Value Labels
+            allBars.select(".bar-val-label")
+                .text(d => d.E_val >= 10 ? d.E_val.toFixed(1) : d.E_val.toFixed(2))
+                .attr("x", xScale.bandwidth() / 2)
+                .attr("y", d => yScale(d.E_val) - 6)
+                .attr("fill", d => d.rank < K_SUBSET ? "#fbbf24" : "#e2e8f0");
+
+            // Axes
+            let gAxes = svg.select(".axes-layer");
+            if (gAxes.empty()) gAxes = svg.append("g").attr("class", "axes-layer");
+            gAxes.selectAll("*").remove();
+
+            const yAxis = useLogScale ? d3.axisLeft(yScale).ticks(5, "~g") : d3.axisLeft(yScale).ticks(5);
+            gAxes.append("g")
+                .attr("transform", `translate(${margin.left}, 0)`)
+                .call(yAxis)
+                .attr("color", "#64748b")
+                .selectAll("text")
+                .attr("font-size", "10px");
+        }
+
+        // Master UI update coordinator
+        function updateUI() {
+            // Update Metric Cards
+            const currentErW = calculateMajorityAtRound(currentRound);
+            document.getElementById("metricRound").innerText = currentRound;
+            document.getElementById("metricSeed").innerText = currentSeed;
+            document.getElementById("metricErW").innerText = currentErW >= 10 ? currentErW.toFixed(1) : currentErW.toFixed(2);
+            
+            // Check if majority process has crossed the certification threshold (1/alpha) at or before currentRound
+            let isCertified = false;
+            for (let t = 0; t <= currentRound; t++) {
+                if (calculateMajorityAtRound(t) >= CERT_THRESHOLD) {
+                    isCertified = true;
+                    break;
+                }
+            }
+            document.getElementById("certifiedBadge").classList.toggle("hidden", !isCertified);
+
+            // Render current active view
+            if (activeView === "trajectories") {
+                renderTrajectoriesChart();
+            } else if (activeView === "order") {
+                renderOrderStatsChart();
+            } else if (activeView === "animated") {
+                renderAnimatedChart();
+            }
+        }
+
+        // --- Playback & Event Controls ---
+        function togglePlay() {
+            isPlaying = !isPlaying;
+            const icon = document.getElementById("playIcon");
+            
+            if (isPlaying) {
+                icon.className = "fa-solid fa-pause text-sm";
+                animInterval = setInterval(() => {
+                    if (currentRound < MAX_BALLOTS) {
+                        currentRound++;
+                        document.getElementById("timeSlider").value = currentRound;
+                        updateUI();
+                    } else {
+                        togglePlay();
+                    }
+                }, animSpeed);
+            } else {
+                icon.className = "fa-solid fa-play text-sm";
+                clearInterval(animInterval);
+            }
+        }
+
+        // Reset simulation and optionally generate a new random instance seed
+        function resetSim(newSeed = true) {
+            if (isPlaying) togglePlay();
+            if (newSeed) {
+                currentSeed = Math.floor(Math.random() * 10000);
+                seatsData = generateElectionData();
+            }
+            currentRound = 0;
+            document.getElementById("timeSlider").value = 0;
+            updateUI();
+        }
+
+        // Listeners
+        document.getElementById("btnPlayPause").addEventListener("click", togglePlay);
+        document.getElementById("btnReset").addEventListener("click", () => resetSim(true));
+
+        document.getElementById("btnStep").addEventListener("click", () => {
+            if (currentRound < MAX_BALLOTS) {
+                currentRound++;
+                document.getElementById("timeSlider").value = currentRound;
+                updateUI();
+            }
+        });
+
+        document.getElementById("timeSlider").addEventListener("input", (e) => {
+            currentRound = parseInt(e.target.value);
+            updateUI();
+        });
+
+        document.getElementById("presetSelect").addEventListener("change", (e) => {
+            currentPreset = e.target.value;
+            seatsData = generateElectionData();
+            resetSim(false);
+        });
+
+        // Tab Switching
+        document.getElementById("tabTraj").addEventListener("click", () => {
+            activeView = "trajectories";
+            document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+            document.getElementById("tabTraj").classList.add("active");
+
+            document.getElementById("viewTrajectories").classList.remove("hidden");
+            document.getElementById("viewOrderStats").classList.add("hidden");
+            document.getElementById("viewAnimated").classList.add("hidden");
+            updateUI();
+        });
+
+        document.getElementById("tabOrder").addEventListener("click", () => {
+            activeView = "order";
+            document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+            document.getElementById("tabOrder").classList.add("active");
+
+            document.getElementById("viewTrajectories").classList.add("hidden");
+            document.getElementById("viewOrderStats").classList.remove("hidden");
+            document.getElementById("viewAnimated").classList.add("hidden");
+            updateUI();
+        });
+
+        document.getElementById("tabAnimated").addEventListener("click", () => {
+            activeView = "animated";
+            document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+            document.getElementById("tabAnimated").classList.add("active");
+
+            document.getElementById("viewTrajectories").classList.add("hidden");
+            document.getElementById("viewOrderStats").classList.add("hidden");
+            document.getElementById("viewAnimated").classList.remove("hidden");
+            updateUI();
+        });
+
+        document.getElementById("btnLog").addEventListener("click", () => {
+            useLogScale = true;
+            document.getElementById("btnLog").className = "px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-600 text-white border border-indigo-500 shadow-sm";
+            document.getElementById("btnLinear").className = "px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700";
+            updateUI();
+        });
+
+        document.getElementById("btnLinear").addEventListener("click", () => {
+            useLogScale = false;
+            document.getElementById("btnLinear").className = "px-2.5 py-1 rounded-md text-xs font-semibold bg-indigo-600 text-white border border-indigo-500 shadow-sm";
+            document.getElementById("btnLog").className = "px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-800 text-slate-400 border border-slate-700 hover:bg-slate-700";
+            updateUI();
+        });
+
+        document.querySelectorAll(".btnSpeed").forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                document.querySelectorAll(".btnSpeed").forEach(b => b.className = "btnSpeed px-2 py-0.5 rounded text-xs font-medium text-slate-400 hover:text-white");
+                e.target.className = "btnSpeed px-2 py-0.5 rounded text-xs font-medium bg-indigo-600 text-white shadow-sm";
+                animSpeed = parseInt(e.target.dataset.speed);
+                if (isPlaying) {
+                    togglePlay();
+                    togglePlay();
+                }
+            });
+        });
+
+        window.addEventListener("resize", () => updateUI());
+
+        // Startup initialization
+        seatsData = generateElectionData();
+        updateUI();
+    </script>
+</body>
+</html>
