@@ -203,7 +203,7 @@ Jack Freestone, Dennis Leung, <strong>Damjan Vukcevic</strong>
 <h2>Parliamentary majorities</h2>
 <ul>
 <li><p>Standard RLA: certify winner of <strong>every seat</strong> (<span class="math inline">s \in \mathcal{S}</span>)</p></li>
-<li><p>New focus: certify a <strong>winning majority</strong> of seats (<span class="math inline">r = \left\lfloor \frac{|\mathcal{S}|}{2} \right\rfloor + 1</span>)</p></li>
+<li><p>New focus: certify a <strong>winning majority</strong> of seats (<span class="math inline">r</span>)</p></li>
 <li><p>Pool evidence across seats to reduce total ballot inspections</p></li>
 </ul>
 </section>
@@ -613,35 +613,11 @@ Reject <span class="math inline">H_0</span> once <span class="math inline">E_t \
 </div>
 </div>
 </section>
-<section id="section" class="slide level2">
+<section id="test-process-visualisation" class="slide level2" data-menu-title="Test process visualisation">
 <h2></h2>
 <div class="r-stretch">
 <iframe src="seat_level_e_process_dynamics_visualizer.html" width="100%" height="100%" style="border:none; border-radius:12px;">
 </iframe>
-</div>
-</section>
-<section id="e-processes-vs.-fisher-combination" class="slide level2 smaller">
-<h2>E-processes vs.&nbsp;Fisher combination</h2>
-<p><strong>Direct e-process combination</strong> (our method)</p>
-<ul>
-<li>Uses fixed, dimension-free threshold <span class="math inline">1/\alpha</span></li>
-</ul>
-<div class="fragment">
-<p><strong>Previous approach</strong> <a href="#/references">(Mohanty et al.&nbsp;2019)</a></p>
-<ul>
-<li><p>Converted seat e-processes into p-values <span class="math inline">P_{s,t} = 1/E_{s,t}</span></p></li>
-<li><p>Combined p-values using Fisher’s method</p></li>
-<li><p>Uses threshold <span class="math inline">\exp\left(\frac{1}{2}\chi^2_{2k, 1-\alpha}\right)</span> for <span class="math inline">k = |W| - r + 1</span></p></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li><p>For <span class="math inline">\alpha = 0.05</span> and <span class="math inline">k = 11</span> (ten spare seats):</p>
-<ul>
-<li><p>E-process threshold is <span class="math inline">1/\alpha = 20</span></p></li>
-<li><p>Fisher threshold is <span class="math inline">\approx 2.3 \times 10^7</span>, requiring <span class="math inline">\sim 5.7\times</span> more samples <span class="emoji" data-emoji="warning">⚠️</span></p></li>
-</ul></li>
-</ul>
 </div>
 </section></section>
 <section>
@@ -653,13 +629,17 @@ Reject <span class="math inline">H_0</span> once <span class="math inline">E_t \
 <h2>Adaptive sampling strategies</h2>
 <ul>
 <li><p>Do sampling in ‘rounds’</p></li>
-<li><p>In each round, can choose whether to ‘ignore’ some seats (do not sample ballots)</p></li>
+<li><p>In each round, can choose whether to ‘ignore’ some seats</p></li>
 <li><p>Goal: minimise total ballots sampled</p></li>
 </ul>
 <div class="fragment">
-<ul>
-<li>Which seats should we sample in each round?</li>
-</ul>
+<div class="callout callout-note no-icon callout-style-simple">
+<div class="callout-body">
+<div class="callout-content">
+<p>Which seats should we sample in each round?</p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="adaptive-sampling-strategies-1" class="slide level2">
@@ -739,57 +719,21 @@ Reject <span class="math inline">H_0</span> once <span class="math inline">E_t \
 <h2>Indian election</h2>
 
 <img data-src="images/comparison.png" class="r-stretch"></section>
-<section id="practical-considerations" class="slide level2 smaller">
-<h2>Practical considerations</h2>
-<ul>
-<li><p><strong>Need coalition info ahead of time</strong></p>
-<ul>
-<li>Method not useable if parties create coalitions <strong>after</strong> the election.</li>
-</ul></li>
-</ul>
-<div class="fragment">
-<ul>
-<li><p><strong>‘Midstream’ certification</strong></p>
-<ul>
-<li>Can run an all-seats audit in tandem</li>
-<li>The parliamentary majority will certify first.</li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li><p><strong>Large-batch sampling</strong></p>
-<ul>
-<li>Audits can be done in a large-batch rounds</li>
-<li>Our methods still apply.</li>
-</ul></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li><p><strong>Comparison audits</strong></p>
-<ul>
-<li>Can use other audit designs</li>
-<li>If SHANGRLA-compatible, our methods apply.</li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="summary" class="slide level2 smaller">
+<section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
-<li><p>Partial conjunction framework enables certifying a majority</p></li>
-<li><p>Efficient: up to <strong>1,000</strong><span class="math inline">\times</span> reduction in ballot inspections on a real-world national election dataset</p></li>
-<li><p>Flexible: allows different audit styles and sampling designs</p></li>
+<li><p><strong>New</strong>: Partial conjunction framework enables certifying a majority</p></li>
+<li><p><strong>Efficient</strong>: up to <strong>1,000</strong><span class="math inline">\times</span> reduction in ballot inspections on a real-world national election dataset</p></li>
+<li><p><strong>Flexible</strong>: allows different audit styles and sampling designs</p></li>
 </ul>
-<div class="fragment">
-<p><strong>Future directions</strong>:</p>
+</section>
+<section id="future-directions" class="slide level2">
+<h2>Future directions</h2>
 <ul>
 <li><p>Improved sampling designs and test process tuning</p></li>
 <li><p>Use reported info (margins)</p></li>
 <li><p>Determine optimal sample sizes for large-batch rounds</p></li>
 </ul>
-</div>
 </section></section>
 <section>
 <section id="questions" class="title-slide slide level1 center">
@@ -844,6 +788,24 @@ Reject <span class="math inline">H_0</span> once <span class="math inline">E_t \
           display:block!important;
       }</style></aside>
 </section>
+<section id="e-processes-vs.-fisher-combination" class="slide level2 smaller">
+<h2>E-processes vs.&nbsp;Fisher combination</h2>
+<p><strong>Direct e-process combination</strong> (our method)</p>
+<ul>
+<li>Uses fixed, dimension-free threshold <span class="math inline">1/\alpha</span></li>
+</ul>
+<p><strong>Previous approach</strong> <a href="#/references">(Mohanty et al.&nbsp;2019)</a></p>
+<ul>
+<li><p>Converted seat e-processes into p-values <span class="math inline">P_{s,t} = 1/E_{s,t}</span></p></li>
+<li><p>Combined p-values using Fisher’s method</p></li>
+<li><p>Uses threshold <span class="math inline">\exp\left(\frac{1}{2}\chi^2_{2k, 1-\alpha}\right)</span> for <span class="math inline">k = |W| - r + 1</span></p></li>
+<li><p>For <span class="math inline">\alpha = 0.05</span> and <span class="math inline">k = 11</span> (ten spare seats):</p>
+<ul>
+<li><p>E-process threshold is <span class="math inline">1/\alpha = 20</span></p></li>
+<li><p>Fisher threshold is <span class="math inline">\approx 2.3 \times 10^7</span>, requiring <span class="math inline">\sim 5.7\times</span> more samples <span class="emoji" data-emoji="warning">⚠️</span></p></li>
+</ul></li>
+</ul>
+</section>
 <section id="posterior-filtering-of-unpromising-seats" class="slide level2 smaller">
 <h2>Posterior filtering of unpromising seats</h2>
 <h3 id="dirichlet-multinomial-bayesian-model">Dirichlet-Multinomial Bayesian model</h3>
@@ -874,8 +836,32 @@ Reject <span class="math inline">H_0</span> once <span class="math inline">E_t \
 <section id="synthetic-elections-1" class="slide level2">
 <h2>Synthetic elections</h2>
 
+<img data-src="images/sim1_sim2.png" class="r-stretch"></section>
+<section id="practical-considerations" class="slide level2 smaller">
+<h2>Practical considerations</h2>
+<ul>
+<li><p><strong>Need coalition info ahead of time</strong></p>
+<ul>
+<li>Method not useable if parties create coalitions <strong>after</strong> the election.</li>
+</ul></li>
+<li><p><strong>‘Midstream’ certification</strong></p>
+<ul>
+<li>Can run an all-seats audit in tandem</li>
+<li>The parliamentary majority will certify first.</li>
+</ul></li>
+<li><p><strong>Large-batch sampling</strong></p>
+<ul>
+<li>Audits can be done in a large-batch rounds</li>
+<li>Our methods still apply.</li>
+</ul></li>
+<li><p><strong>Comparison audits</strong></p>
+<ul>
+<li>Can use other audit designs</li>
+<li>If SHANGRLA-compatible, our methods apply.</li>
+</ul></li>
+</ul>
 
-<img data-src="images/sim1_sim2.png" class="r-stretch"></section></section>
+</section></section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">

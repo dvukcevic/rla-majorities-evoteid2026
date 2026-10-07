@@ -68,12 +68,11 @@ ggplot(parl_data_example) +
   theme_ggparliament()
 ```
 
-
 ## Parliamentary majorities
 
 - Standard RLA: certify winner of **every seat** ($s \in \mathcal{S}$)
 
-- New focus: certify a **winning majority** of seats ($r = \left\lfloor \frac{|\mathcal{S}|}{2} \right\rfloor + 1$)
+- New focus: certify a **winning majority** of seats ($r$)
 
 - Pool evidence across seats to reduce total ballot inspections
 
@@ -555,37 +554,13 @@ $E_{(1),t} \leqslant E_{(2),t} \leqslant \dots$ are the **order statistics** of 
 These are all e-processes, Ville's inequality applies. (Theorem 1 in paper)
 :::
 
+##  {#test-process-visualisation data-menu-title="Test process visualisation"}
 
-## 
+::: r-stretch
+<iframe src="seat_level_e_process_dynamics_visualizer.html" width="100%" height="100%" style="border:none; border-radius:12px;">
 
-::: {.r-stretch}
-<iframe src="seat_level_e_process_dynamics_visualizer.html" width="100%" height="100%" style="border:none; border-radius:12px;"></iframe>
+</iframe>
 :::
-
-
-## E-processes vs. Fisher combination {.smaller}
-
-**Direct e-process combination** (our method)
-
-- Uses fixed, dimension-free threshold $1/\alpha$
-
-. . .
-
-**Previous approach** [(Mohanty et al. 2019)](#references)
-
-- Converted seat e-processes into p-values $P_{s,t} = 1/E_{s,t}$
-
-- Combined p-values using Fisher's method
-
-- Uses threshold $\exp\left(\frac{1}{2}\chi^2_{2k, 1-\alpha}\right)$ for $k = |W| - r + 1$
-
-. . .
-
-- For $\alpha = 0.05$ and $k = 11$ (ten spare seats):
-
-  - E-process threshold is $1/\alpha = 20$
-
-  - Fisher threshold is $\approx 2.3 \times 10^7$, requiring $\sim 5.7\times$ more samples :warning:
 
 # Sampling strategies
 
@@ -593,13 +568,15 @@ These are all e-processes, Ville's inequality applies. (Theorem 1 in paper)
 
 - Do sampling in 'rounds'
 
-- In each round, can choose whether to 'ignore' some seats (do not sample ballots)
+- In each round, can choose whether to 'ignore' some seats
 
 - Goal: minimise total ballots sampled
 
 . . .
 
-- Which seats should we sample in each round?
+::: {.callout-note appearance="minimal"}
+Which seats should we sample in each round?
+:::
 
 ## Adaptive sampling strategies
 
@@ -698,44 +675,15 @@ ggplot(parl_data) +
 
 ![](images/comparison.png)
 
-## Practical considerations {.smaller}
+## Summary
 
-- **Need coalition info ahead of time**
+- **New**: Partial conjunction framework enables certifying a majority
 
-  - Method not useable if parties create coalitions **after** the election.
+- **Efficient**: up to **1,000**$\times$ reduction in ballot inspections on a real-world national election dataset
 
-. . .
+- **Flexible**: allows different audit styles and sampling designs
 
-- **'Midstream' certification**
-
-  - Can run an all-seats audit in tandem
-  - The parliamentary majority will certify first.
-
-. . .
-
-- **Large-batch sampling**
-
-  - Audits can be done in a large-batch rounds
-  - Our methods still apply.
-
-. . .
-
-- **Comparison audits**
-
-  - Can use other audit designs
-  - If SHANGRLA-compatible, our methods apply.
-
-## Summary {.smaller}
-
-- Partial conjunction framework enables certifying a majority
-
-- Efficient: up to **1,000**$\times$ reduction in ballot inspections on a real-world national election dataset
-
-- Flexible: allows different audit styles and sampling designs
-
-. . .
-
-**Future directions**:
+## Future directions
 
 - Improved sampling designs and test process tuning
 
@@ -784,6 +732,26 @@ $$M_{s,j,t} = \prod_{i=1}^{n_s(t)} \left(1 + \lambda_{s,j,i}(X_{s,j,i} - \mu_{s,
 At the individual seat level, we leverage the SHANGRLA framework and ALPHA betting supermartingales. Each seat $s$ gets a non-negative test process $E_{s,t}$ that measures the evidence accumulated against the null hypothesis $H_s$. Ville's inequality guarantees that these statistics are anytime-valid under continuous sequential sampling.
 :::
 
+## E-processes vs. Fisher combination {.smaller}
+
+**Direct e-process combination** (our method)
+
+- Uses fixed, dimension-free threshold $1/\alpha$
+
+**Previous approach** [(Mohanty et al. 2019)](#references)
+
+- Converted seat e-processes into p-values $P_{s,t} = 1/E_{s,t}$
+
+- Combined p-values using Fisher's method
+
+- Uses threshold $\exp\left(\frac{1}{2}\chi^2_{2k, 1-\alpha}\right)$ for $k = |W| - r + 1$
+
+- For $\alpha = 0.05$ and $k = 11$ (ten spare seats):
+
+  - E-process threshold is $1/\alpha = 20$
+
+  - Fisher threshold is $\approx 2.3 \times 10^7$, requiring $\sim 5.7\times$ more samples :warning:
+
 ## Posterior filtering of unpromising seats {.smaller}
 
 ### Dirichlet-Multinomial Bayesian model
@@ -805,3 +773,24 @@ To overcome the greedy trap, we introduce a Bayesian filtering layer. Using a Di
 ## Synthetic elections
 
 ![](images/sim1_sim2.png)
+
+## Practical considerations {.smaller}
+
+- **Need coalition info ahead of time**
+
+  - Method not useable if parties create coalitions **after** the election.
+
+- **'Midstream' certification**
+
+  - Can run an all-seats audit in tandem
+  - The parliamentary majority will certify first.
+
+- **Large-batch sampling**
+
+  - Audits can be done in a large-batch rounds
+  - Our methods still apply.
+
+- **Comparison audits**
+
+  - Can use other audit designs
+  - If SHANGRLA-compatible, our methods apply.
