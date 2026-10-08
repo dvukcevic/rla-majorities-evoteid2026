@@ -180,15 +180,9 @@ How to test "any" or "all" of these?
 - $H_0 = \cup_j \bar{S}_j \quad$ "at least one statement is false"
 - $H_1 = \cap_j      S_j  \quad$ "**all** statements are true"
 
-. . .
-
 This is a **conjunction**
 
-. . .
-
 Need to reject **all** of the complementary nulls, $\bar{S}_j$
-
-. . .
 
 ::: callout-tip
 ### Example: SHANGRLA
@@ -201,15 +195,9 @@ The $S_j$ are called *assertions*
 - $H_0 = \cap_j \bar{S}_j \quad$ "all statements are false"
 - $H_1 = \cup_j      S_j  \quad$ "**at least one** statement is true"
 
-. . .
-
 This is a **disjunction**
 
-. . .
-
 Need to reject **at least one** of the complementary nulls, $\bar{S}_j$
-
-. . .
 
 ::: callout-tip
 ### Example: AWAIRE
