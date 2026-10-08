@@ -167,8 +167,8 @@ Statements: $$\mathcal{S} = \{S_1, S_2, \dots\}$$
 
 Example:
 
-- $S_1 =$ Alice beat Bob
-- $S_2 =$ Alice beat Charlie
+- $S_1 =$ Reported winner for seat 1 is correct
+- $S_2 =$ Reported winner for seat 2 is correct
 - etc.
 
 . . .
