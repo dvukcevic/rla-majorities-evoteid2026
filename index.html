@@ -429,45 +429,6 @@ Jack Freestone, Dennis Leung, <strong>Damjan Vukcevic</strong>
 </div>
 </div>
 </section>
-<section id="summary-of-combinations" class="slide level2">
-<h2>Summary of combinations</h2>
-<table class="caption-top" style="width:100%;">
-<colgroup>
-<col style="width: 24%">
-<col style="width: 24%">
-<col style="width: 26%">
-<col style="width: 24%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>“Any”</th>
-<th>“Some”</th>
-<th>“All”</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Type</strong></td>
-<td>Disjunction</td>
-<td>Partial conjunction</td>
-<td>Conjunction</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">H_0</span> notation</td>
-<td><span class="math inline">H_{1/\mathcal{S}}</span></td>
-<td><span class="math inline">H_{r/\mathcal{S}}</span></td>
-<td><span class="math inline">H_{|\mathcal{S}|/\mathcal{S}}</span></td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">H_1</span> meaning</td>
-<td>At least 1</td>
-<td>At least <span class="math inline">r</span></td>
-<td>At least <span class="math inline">|\mathcal{S}|</span></td>
-</tr>
-</tbody>
-</table>
-</section>
 <section id="parliamentary-majority-null" class="slide level2">
 <h2>Parliamentary majority null</h2>
 <p>Define:</p>
@@ -513,68 +474,6 @@ Reject <span class="math inline">H_0</span> once <span class="math inline">E_t \
 </div>
 </div>
 </div></div>
-</section>
-<section id="tests-based-on-e-processes" class="slide level2">
-<h2>Tests based on e-processes</h2>
-<ul>
-<li><span class="math inline">E_t</span> should be an <strong>e-process</strong> under <span class="math inline">H_0</span></li>
-<li><span class="math inline">E_t</span> should <strong>grow quickly</strong> under <span class="math inline">H_1</span></li>
-</ul>
-<div class="columns">
-<div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/plot-process-h0-1.png" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="index_files/figure-revealjs/plot-process-h1-1.png" style="width:100.0%"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-</section>
-<section id="villes-inequality" class="slide level2">
-<h2>Ville’s inequality</h2>
-<p>Let <span class="math inline">E_0, E_1, E_2, \dots</span> be an e-process.</p>
-<p>For any <span class="math inline">\alpha &gt; 0</span>, <span class="math display">\Pr\left(\max_t (E_t) \geqslant \frac{1}{\alpha}\right) \leqslant \alpha</span></p>
-<div class="fragment">
-<p><span class="math inline">\Rightarrow</span> risk limit <span class="math inline">= \alpha</span></p>
-</div>
-</section>
-<section id="testing-combinations-of-hypotheses" class="slide level2">
-<h2>Testing combinations of hypotheses</h2>
-<p>Statements: <span class="math display">\mathcal{S} = \{S_1, S_2, \dots\}</span></p>
-<div class="fragment">
-<p>Test processes:</p>
-<ul>
-<li>Test <span class="math inline">S_j</span> with: <span class="math inline">E_{j,1}, E_{j,2}, \dots</span></li>
-</ul>
-</div>
-<div class="fragment">
-<p>How do we test combinations?</p>
-</div>
-</section>
-<section id="testing-combinations-of-hypotheses-1" class="slide level2">
-<h2>Testing combinations of hypotheses</h2>
-<p>Recipes (for nulls):</p>
-<ul>
-<li>union <span class="math inline">\rightarrow</span> minimum</li>
-</ul>
-<p><span class="math display">H_0 = \bigcup_j \bar{S}_j \quad \longrightarrow \quad E_t = \min_j E_{j,t}</span></p>
-<ul>
-<li>intersection <span class="math inline">\rightarrow</span> product (if independent)</li>
-</ul>
-<p><span class="math display">H_0 = \bigcap_j \bar{S}_j \quad \longrightarrow \quad E_t = \prod_j E_{j,t}</span></p>
 </section>
 <section id="parliamentary-majority-test-process" class="slide level2">
 <h2>Parliamentary majority test process</h2>
@@ -749,6 +648,107 @@ Reject <span class="math inline">H_0</span> once <span class="math inline">E_t \
 <section id="appendix" class="title-slide slide level1 center">
 <h1>Appendix</h1>
 
+</section>
+<section id="summary-of-hypothesis-combinations" class="slide level2">
+<h2>Summary of hypothesis combinations</h2>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 26%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>“Any”</th>
+<th>“Some”</th>
+<th>“All”</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Type</strong></td>
+<td>Disjunction</td>
+<td>Partial conjunction</td>
+<td>Conjunction</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">H_0</span> notation</td>
+<td><span class="math inline">H_{1/\mathcal{S}}</span></td>
+<td><span class="math inline">H_{r/\mathcal{S}}</span></td>
+<td><span class="math inline">H_{|\mathcal{S}|/\mathcal{S}}</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">H_1</span> meaning</td>
+<td>At least 1</td>
+<td>At least <span class="math inline">r</span></td>
+<td>At least <span class="math inline">|\mathcal{S}|</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="tests-based-on-e-processes" class="slide level2">
+<h2>Tests based on e-processes</h2>
+<ul>
+<li><span class="math inline">E_t</span> should be an <strong>e-process</strong> under <span class="math inline">H_0</span></li>
+<li><span class="math inline">E_t</span> should <strong>grow quickly</strong> under <span class="math inline">H_1</span></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/plot-process-h0-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/plot-process-h1-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="villes-inequality" class="slide level2">
+<h2>Ville’s inequality</h2>
+<p>Let <span class="math inline">E_0, E_1, E_2, \dots</span> be an e-process.</p>
+<p>For any <span class="math inline">\alpha &gt; 0</span>, <span class="math display">\Pr\left(\max_t (E_t) \geqslant \frac{1}{\alpha}\right) \leqslant \alpha</span></p>
+<div class="fragment">
+<p><span class="math inline">\Rightarrow</span> risk limit <span class="math inline">= \alpha</span></p>
+</div>
+</section>
+<section id="testing-combinations-of-hypotheses" class="slide level2">
+<h2>Testing combinations of hypotheses</h2>
+<p>Statements: <span class="math display">\mathcal{S} = \{S_1, S_2, \dots\}</span></p>
+<div class="fragment">
+<p>Test processes:</p>
+<ul>
+<li>Test <span class="math inline">S_j</span> with: <span class="math inline">E_{j,1}, E_{j,2}, \dots</span></li>
+</ul>
+</div>
+<div class="fragment">
+<p>How do we test combinations?</p>
+</div>
+</section>
+<section id="testing-combinations-of-hypotheses-1" class="slide level2">
+<h2>Testing combinations of hypotheses</h2>
+<p>Recipes (for nulls):</p>
+<ul>
+<li>union <span class="math inline">\rightarrow</span> minimum</li>
+</ul>
+<p><span class="math display">H_0 = \bigcup_j \bar{S}_j \quad \longrightarrow \quad E_t = \min_j E_{j,t}</span></p>
+<ul>
+<li>intersection <span class="math inline">\rightarrow</span> product (if independent)</li>
+</ul>
+<p><span class="math display">H_0 = \bigcap_j \bar{S}_j \quad \longrightarrow \quad E_t = \prod_j E_{j,t}</span></p>
 </section>
 <section id="seat-level-e-processes-via-shangrla" class="slide level2 smaller">
 <h2>Seat-level e-processes via SHANGRLA</h2>
