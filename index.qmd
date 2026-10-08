@@ -440,20 +440,6 @@ These are all e-processes, Ville's inequality applies. (Theorem 1 in paper)
 
 ## Adaptive sampling strategies
 
-- Do sampling in 'rounds'
-
-- In each round, can choose whether to 'ignore' some seats
-
-- Goal: minimise total ballots sampled
-
-. . .
-
-::: {.callout-note appearance="minimal"}
-Which seats should we sample in each round?
-:::
-
-## Adaptive sampling strategies
-
 ![](images/sampling_schemes.svg)
 
 ## 'Straw man' strategies
